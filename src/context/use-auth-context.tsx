@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 
 type InitialValuesProps = {
@@ -36,6 +37,5 @@ export const useAuthContextHook = () => {
   return state;
 };
 
-
 // 5 hour -> chat.ai
-// 5 hour -> 1 hour webrtc, 2 hour redis, pubsub 
+// 5 hour -> 1 hour webrtc, 2 hour redis, pubsub

@@ -1,7 +1,22 @@
+"use client";
+import Loader from "@/components/loader";
 import { AuthContextProvider } from "@/context/use-auth-context";
+import { useSignUpForm } from "@/hooks/sign-up/useSignUp";
+import { FormProvider } from "react-hook-form";
 
-const SignUpFOrmProvider = ({ children }: React.ReactNode) => {
-  return <AuthContextProvider>SignUpFOrmProvider</AuthContextProvider>;
+const SignUpFormProvider = ({ children }: React.ReactNode) => {
+  const { methods, onHandleSubmit, loading } = useSignUpForm();
+  return (
+    <AuthContextProvider>
+      <FormProvider {...methods}>
+        <form onSubmit={onHandleSubmit} className="w-full">
+          <div className="flex flex-col justify-between gap-3 h-full">
+            <Loader loading={loading}>{children}</Loader>
+          </div>
+        </form>
+      </FormProvider>
+    </AuthContextProvider>
+  );
 };
 
-export default SignUpFOrmProvider;
+export default SignUpFormProvider;
