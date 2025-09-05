@@ -1,4 +1,3 @@
-import { Loader } from "next/dynamic";
 import Spinner from "../spinner";
 
 type LoaderProps = {

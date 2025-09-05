@@ -1,3 +1,5 @@
+import { FormGenerator } from "@/components/global/form-generator";
+import { USER_REGISTRATION_FORM } from "@/constants/forms";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 type Props = {
@@ -5,7 +7,7 @@ type Props = {
   errors: FieldErrors<FieldValues>;
 };
 
-const AccountDetailsForm = () => {
+const AccountDetailsForm = ({ errors, register }) => {
   return (
     <>
       <h2 className="text-neutral-700 md:text-4xl font-bold">
@@ -13,11 +15,15 @@ const AccountDetailsForm = () => {
       </h2>
 
       <p className="text-black md:text-sm">Enter your email and password</p>
-      {
-        USER_REGISTRATION_FORM.map((field)=> (
-            <FormGenerator 
-        ))
-      }
+      {USER_REGISTRATION_FORM.map((field) => (
+        <FormGenerator
+          key={field.id}
+          {...field}
+          errors={errors}
+          register={register}
+          name={field.name}
+        />
+      ))}
     </>
   );
 };
