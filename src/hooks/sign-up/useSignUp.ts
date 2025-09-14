@@ -29,7 +29,7 @@ export const useSignUpForm = () => {
     password: string,
     onNext: React.Dispatch<React.SetStateAction<number>>
   ) => {
-    if (!isloaded) return;
+    if (!isLoaded) return;
 
     try {
       await signUp.create({
@@ -38,20 +38,24 @@ export const useSignUpForm = () => {
       });
 
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+
       onNext((prev) => prev + 1);
     } catch (error) {
-      toast({
-        title: "Error in otp verification",
-        description: error?.errors[0]?.longMessage,
-      });
+      toast(
+        error?.errors?.[0]?.longMessage ||
+          error?.message ||
+          "Error in otp verification. An unexpected error occurred."
+      );
     }
   };
 
   const onHandleSubmit = methods.handleSubmit(
     async (values: UserRegistrationProps) => {
       if (!isLoaded) return;
+
       try {
         setLoading(true);
+
         const completeSignUp = await signUp.attemptEmailAddressVerification({
           code: values.otp,
         });
@@ -77,21 +81,19 @@ export const useSignUpForm = () => {
             });
           }
 
-          setLoading(true);
+          setLoading(false);
           router.push("/dashboard");
 
           if (registered?.status === 400) {
-            toast({
-              title: "Error",
-              description: "Somethin went wrong!",
-            });
+            toast("Something went wrong on completing user registration!");
           }
         }
       } catch (error: any) {
-        toast({
-          title: "Error",
-          description: error?.errors[0].longMessage,
-        });
+        toast(
+          error?.errors?.[0]?.longMessage ||
+            error?.message ||
+            "Error in form submit"
+        );
       }
     }
   );

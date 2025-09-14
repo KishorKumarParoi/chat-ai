@@ -33,11 +33,11 @@ export const UserRegistrationSchema: ZodType<UserRegistrationProps> = z
     otp: z.string().min(6, { message: "You must enter a 6 digit code" }),
   })
   .refine((schema) => schema.password === schema.confirmPassword, {
-    message: "passwords does not match",
+    message: "passwords do not match",
     path: ["confirmPassword"],
   })
   .refine((schema) => schema.email === schema.confirmEmail, {
-    message: "Your emails does not match!",
+    message: "Your emails do not match!",
     path: ["confirmEmail"],
   });
 
