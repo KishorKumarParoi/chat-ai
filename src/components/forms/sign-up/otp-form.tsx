@@ -5,7 +5,7 @@ type Props = {
   onOTP: string;
 };
 
-const OTPForm = ({ onOTP, setOTP }) => {
+const OTPForm = ({ onOTP, setOTP }: Props) => {
   return (
     <>
       <h2 className="text-blue-400 md:text-4xl font-bold">Enter OTP</h2>

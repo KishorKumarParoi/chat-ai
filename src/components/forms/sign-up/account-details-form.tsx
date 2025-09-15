@@ -7,7 +7,7 @@ type Props = {
   errors: FieldErrors<FieldValues>;
 };
 
-const AccountDetailsForm = ({ errors, register }) => {
+const AccountDetailsForm = ({ errors, register }: Props) => {
   return (
     <>
       <h2 className="text-neutral-700 md:text-4xl font-bold">

@@ -41,11 +41,7 @@ export const useSignUpForm = () => {
 
       onNext((prev) => prev + 1);
     } catch (error) {
-      toast(
-        error?.errors?.[0]?.longMessage ||
-          error?.message ||
-          "Error in otp verification. An unexpected error occurred."
-      );
+      toast("Error in otp verification. An unexpected error occurred: ", error);
     }
   };
 
