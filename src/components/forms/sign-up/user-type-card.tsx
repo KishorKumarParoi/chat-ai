@@ -28,45 +28,50 @@ const UserTypeCard = ({
     <Label>
       <Card
         className={cn(
-          "w-full cursor-pointer transition-all duration-300 border-2 shadow-md hover:shadow-xl hover:scale-[1.025]",
+          "w-full cursor-pointer transition-all duration-500 border-2 shadow-md hover:shadow-xl hover:scale-[1.03] overflow-hidden",
           isSelected
-            ? "border-cyan-600 bg-gradient-to-br from-cyan-100 via-white to-cyan-50 ring-2 ring-cyan-400"
+            ? "border-blue-700 bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 ring-2 ring-blue-400"
             : "border-gray-200 bg-white"
         )}
+        style={{
+          filter: isSelected
+            ? "drop-shadow(0 8px 32px rgba(37, 99, 235, 0.18))"
+            : "none",
+        }}
       >
-        <CardContent className="flex justify-between items-center p-4">
-          <div className="flex items-center gap-4">
+        <CardContent className="flex justify-between items-center p-5">
+          <div className="flex items-center gap-5">
             <div
               className={cn(
-                "flex items-center justify-center rounded-full transition-colors duration-300",
+                "flex items-center justify-center rounded-full border transition-colors duration-500",
                 isSelected
-                  ? "bg-cyan-100 border-2 border-cyan-400"
-                  : "bg-gray-100 border border-gray-200"
+                  ? "bg-blue-800 border-blue-300"
+                  : "bg-gray-100 border-gray-300"
               )}
               style={{ width: 56, height: 56 }}
             >
               <User
                 size={32}
                 className={cn(
-                  "transition-colors duration-300",
-                  isSelected ? "text-cyan-600" : "text-gray-400"
+                  "transition-colors duration-500",
+                  isSelected ? "text-blue-200" : "text-gray-400"
                 )}
               />
             </div>
             <div>
               <CardDescription
                 className={cn(
-                  "font-bold transition-colors duration-300",
-                  isSelected ? "text-cyan-700" : "text-gray-800"
+                  "font-bold transition-colors duration-500 tracking-wide",
+                  isSelected ? "text-white" : "text-gray-900"
                 )}
-                style={{ fontSize: "1.35rem" }}
+                style={{ fontSize: "1.3rem" }}
               >
                 {title}
               </CardDescription>
               <CardDescription
                 className={cn(
-                  "font-medium transition-colors duration-300",
-                  isSelected ? "text-cyan-500" : "text-gray-400"
+                  "font-medium transition-colors duration-500",
+                  isSelected ? "text-blue-100" : "text-gray-500"
                 )}
                 style={{ fontSize: "1.05rem" }}
               >
@@ -77,16 +82,16 @@ const UserTypeCard = ({
           <div className="flex items-center">
             <div
               className={cn(
-                "w-6 h-6 flex items-center justify-center rounded-full border-2 transition-all duration-300",
+                "w-6 h-6 flex items-center justify-center rounded-full border-2 transition-all duration-500",
                 isSelected
-                  ? "border-cyan-600 bg-cyan-400/20"
+                  ? "border-blue-400 bg-blue-600/30"
                   : "border-gray-300 bg-white"
               )}
             >
               <div
                 className={cn(
-                  "w-3 h-3 rounded-full transition-all duration-300",
-                  isSelected ? "bg-cyan-600" : "bg-transparent"
+                  "w-3 h-3 rounded-full transition-all duration-500",
+                  isSelected ? "bg-blue-500" : "bg-transparent"
                 )}
               />
               <Input

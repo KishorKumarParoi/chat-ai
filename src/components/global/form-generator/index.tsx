@@ -3,7 +3,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ErrorMessage } from "@hookform/error-message";
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import {
+  FieldErrors,
+  FieldValues,
+  UseFormRegister,
+  useFormContext,
+} from "react-hook-form";
 
 type Props = {
   type?: "text" | "email" | "password" | "number";
@@ -33,6 +38,23 @@ export const FormGenerator = (props: Props) => {
     lines,
     form,
   } = props;
+
+  // Always call useFormContext unconditionally
+  let isTouched = true;
+  let formState;
+  let formContext;
+
+  try {
+    formContext = useFormContext();
+    formState = formContext.formState;
+    isTouched = !!formState.touchedFields?.[name];
+  } catch {
+    // If not inside FormProvider, fallback to always show errors
+    isTouched = true;
+  }
+
+  const showError = isTouched && errors[name];
+
   switch (inputType) {
     case "input":
       return (
@@ -45,20 +67,22 @@ export const FormGenerator = (props: Props) => {
             id={`input-${label}`}
             type={type}
             placeholder={placeholder}
-            className="bg-transparent border-slate-700 text-white"
+            className="bg-transparent border-slate-700 text-black"
             form={form}
             {...register(name)}
           />
 
-          <ErrorMessage
-            errors={errors}
-            name={name}
-            render={({ message }) => (
-              <p className="text-red-400 mt-2">
-                {message === "Required" ? "" : message}
-              </p>
-            )}
-          />
+          {showError && (
+            <ErrorMessage
+              errors={errors}
+              name={name}
+              render={({ message }) => (
+                <p className="text-red-400 mt-2">
+                  {message === "Required" ? "" : message}
+                </p>
+              )}
+            />
+          )}
         </Label>
       );
 
@@ -87,15 +111,17 @@ export const FormGenerator = (props: Props) => {
               ))}
           </select>
 
-          <ErrorMessage
-            errors={errors}
-            name={name}
-            render={({ message }) => (
-              <p className="text-red-400 mt-2">
-                {message === "Required" ? "" : message}
-              </p>
-            )}
-          />
+          {showError && (
+            <ErrorMessage
+              errors={errors}
+              name={name}
+              render={({ message }) => (
+                <p className="text-red-400 mt-2">
+                  {message === "Required" ? "" : message}
+                </p>
+              )}
+            />
+          )}
         </Label>
       );
 
@@ -117,15 +143,17 @@ export const FormGenerator = (props: Props) => {
             {...register(name)}
           />
 
-          <ErrorMessage
-            errors={errors}
-            name={name}
-            render={({ message }) => (
-              <p className="text-red-400 mt-2">
-                {message === "Required" ? "" : message}
-              </p>
-            )}
-          />
+          {showError && (
+            <ErrorMessage
+              errors={errors}
+              name={name}
+              render={({ message }) => (
+                <p className="text-red-400 mt-2">
+                  {message === "Required" ? "" : message}
+                </p>
+              )}
+            />
+          )}
         </Label>
       );
 
@@ -138,15 +166,17 @@ export const FormGenerator = (props: Props) => {
           {label && label}
           <Checkbox form={form} id={`checkbox-${label}`} {...register(name)} />
           {label && <span>{label}</span>}
-          <ErrorMessage
-            errors={errors}
-            name={name}
-            render={({ message }) => (
-              <p className="text-red-400 mt-2">
-                {message === "Required" ? "" : message}
-              </p>
-            )}
-          />
+          {showError && (
+            <ErrorMessage
+              errors={errors}
+              name={name}
+              render={({ message }) => (
+                <p className="text-red-400 mt-2">
+                  {message === "Required" ? "" : message}
+                </p>
+              )}
+            />
+          )}
         </Label>
       );
 

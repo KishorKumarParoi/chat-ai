@@ -14,7 +14,9 @@ const AccountDetailsForm = ({ errors, register }: Props) => {
         Account Details
       </h2>
 
-      <p className="text-black md:text-sm">Enter your email and password</p>
+      <p className="text-black md:text-sm">
+        Enter your fullname, email and password
+      </p>
       {USER_REGISTRATION_FORM.map((field) => (
         <FormGenerator
           key={field.id}

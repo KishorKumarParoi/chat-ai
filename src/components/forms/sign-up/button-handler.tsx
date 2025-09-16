@@ -14,10 +14,13 @@ const ButtonHandler = () => {
   const { isDirty: isEmail } = getFieldState("email", formState);
   const { isDirty: isPassword } = getFieldState("password", formState);
 
+  const btn =
+    "w-full bg-gradient-to-r from-fuchsia-600 via-purple-600 to-blue-500 hover:from-fuchsia-700 hover:via-purple-700 hover:to-blue-600 text-white font-bold cursor-pointer text-lg shadow-lg transition-all duration-300 rounded-xl py-3";
+
   if (currentStep === 3) {
     return (
       <div className="w-full flex flex-col ga-3 items-center">
-        <Button type="submit" className="w-full">
+        <Button type="submit" className={btn}>
           Create an account
         </Button>
         <p>
@@ -35,7 +38,7 @@ const ButtonHandler = () => {
       <div className="w-full flex flex-col gap-3 items-center">
         <Button
           type="submit"
-          className="w-full"
+          className={btn}
           {...(isName &&
             isEmail &&
             isPassword && {
@@ -63,7 +66,7 @@ const ButtonHandler = () => {
     <div className="w-full flex flex-col gap-3 items-center">
       <Button
         type="submit"
-        className="w-full"
+        className={btn}
         onClick={() => setCurrentStep((prev: number) => prev + 1)}
       >
         Continue
