@@ -10,13 +10,17 @@ type Props = {
 const TypeSelectionForm = ({ register, userType, setUserType }: Props) => {
   return (
     <>
-      <h2 className="text-slate-800 md:text-4xl font-bold">
+      <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-500 to-purple-600 md:text-5xl text-3xl font-extrabold mb-2 drop-shadow-lg text-center">
         Create an account
       </h2>
 
-      <p className="text-blue-500 md:text-sm">
-        Tell us about yourself! What do you do? Let&apos;s tailor your <br />
-        experience so it best suits you.
+      <p className="text-blue-700 md:text-lg text-base font-medium mb-8 text-center bg-blue-50/60 rounded-xl px-4 py-3 shadow-sm">
+        Tell us about yourself!{" "}
+        <span className="font-semibold text-cyan-600">What do you do?</span>{" "}
+        <br />
+        <span className="text-purple-600">
+          Let&apos;s tailor your experience so it best suits you.
+        </span>
       </p>
 
       <UserTypeCard

@@ -47,7 +47,7 @@ const Layout = async ({ children }: Props) => {
               priority
             />
             <span className="text-2xl font-bold text-purple-700 tracking-tight">
-              Chat.ai
+              chat.ai
             </span>
           </div>
           {children}
