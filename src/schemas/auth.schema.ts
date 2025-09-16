@@ -44,7 +44,6 @@ export const UserRegistrationSchema: ZodType<UserRegistrationProps> = z
 export type UserLoginProps = {
   email: string;
   password: string;
-  confirmPassword: string;
 };
 
 export const UserLoginSchema: ZodType<UserLoginProps> = z.object({
@@ -59,5 +58,4 @@ export const UserLoginSchema: ZodType<UserLoginProps> = z.object({
       (value) => /^[a-zA-Z0-9_.-]*$/.test(value ?? ""),
       "password should contain only alphabets and numbers"
     ),
-  confirmPassword: z.string(),
 });

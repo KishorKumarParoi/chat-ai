@@ -1,7 +1,8 @@
+"use client";
 import { UserLoginProps, UserLoginSchema } from "@/schemas/auth.schema";
 import { useSignIn } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -10,6 +11,7 @@ export const useSignInForm = () => {
   const { isLoaded, setActive, signIn } = useSignIn();
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
+
   const methods = useForm<UserLoginProps>({
     resolver: zodResolver(UserLoginSchema as any),
     mode: "onChange",
@@ -28,19 +30,14 @@ export const useSignInForm = () => {
 
         if (authenticated.status === "complete") {
           await setActive({ session: authenticated.createdSessionId });
-          toast({
-            title: "Success",
-            description: "Welcome Back!",
-          });
+
+          toast("Welcome Back, Login Successful!");
           router.push("/dashboard");
         }
       } catch (error: any) {
         setLoading(false);
         if (error.errors[0].code === "form_password_incorrect") {
-          toast({
-            title: "Error",
-            description: "email/password is incorrect try again",
-          });
+          toast("email/password is incorrect try again");
         }
       }
     }

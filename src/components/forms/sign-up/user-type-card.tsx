@@ -39,8 +39,10 @@ const UserTypeCard = ({
             : "none",
         }}
       >
-        <CardContent className="flex justify-between items-center p-5">
-          <div className="flex items-center gap-5">
+        <CardContent className="flex justify-between items-center p-3">
+          {/* Reduced padding from p-5 to p-3 */}
+          <div className="flex items-center gap-4">
+            {/* Reduced gap from 5 to 4 */}
             <div
               className={cn(
                 "flex items-center justify-center rounded-full border transition-colors duration-500",
@@ -48,10 +50,12 @@ const UserTypeCard = ({
                   ? "bg-blue-800 border-blue-300"
                   : "bg-gray-100 border-gray-300"
               )}
-              style={{ width: 56, height: 56 }}
+              style={{ width: 48, height: 48 }}
+              // Reduced size from 56x56 to 48x48
             >
               <User
-                size={32}
+                size={28}
+                // Reduced icon size from 32 to 28
                 className={cn(
                   "transition-colors duration-500",
                   isSelected ? "text-blue-200" : "text-gray-400"
@@ -64,7 +68,8 @@ const UserTypeCard = ({
                   "font-bold transition-colors duration-500 tracking-wide",
                   isSelected ? "text-white" : "text-gray-900"
                 )}
-                style={{ fontSize: "1.3rem" }}
+                style={{ fontSize: "1.1rem" }}
+                // Reduced font size from 1.3rem to 1.1rem
               >
                 {title}
               </CardDescription>
@@ -73,7 +78,8 @@ const UserTypeCard = ({
                   "font-medium transition-colors duration-500",
                   isSelected ? "text-blue-100" : "text-gray-500"
                 )}
-                style={{ fontSize: "1.05rem" }}
+                style={{ fontSize: "0.95rem" }}
+                // Reduced font size from 1.05rem to 0.95rem
               >
                 {text}
               </CardDescription>
@@ -82,16 +88,16 @@ const UserTypeCard = ({
           <div className="flex items-center">
             <div
               className={cn(
-                "w-6 h-6 flex items-center justify-center rounded-full border-2 transition-all duration-500",
+                "w-5 h-5 flex items-center justify-center rounded-full border-2 transition-all duration-500",
                 isSelected
-                  ? "border-blue-400 bg-blue-600/30"
+                  ? "border-red-500 bg-red-100"
                   : "border-gray-300 bg-white"
               )}
             >
               <div
                 className={cn(
-                  "w-3 h-3 rounded-full transition-all duration-500",
-                  isSelected ? "bg-blue-500" : "bg-transparent"
+                  "w-2.5 h-2.5 rounded-full transition-all duration-500",
+                  isSelected ? "bg-red-500" : "bg-transparent"
                 )}
               />
               <Input
