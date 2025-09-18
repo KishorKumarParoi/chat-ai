@@ -1,4 +1,5 @@
 import HeroSection from "@/components/main-page/heroSection";
+import MainSection from "@/components/main-page/MainSection";
 import Navbar from "@/components/navbar";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <main>
       <Navbar />
       <HeroSection />
+      <MainSection />
     </main>
   );
 };

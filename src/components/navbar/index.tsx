@@ -4,7 +4,10 @@ import { ModeToggle } from "./theme-toggle";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-gradient-to-r from-purple-300 via-blue-300 to-fuchsia-100/80 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 backdrop-blur-lg shadow-lg py-3 px-6 flex items-center justify-between transition-colors duration-300">
+    <nav
+      suppressHydrationWarning
+      className="w-full bg-gradient-to-r from-purple-300 via-blue-300 to-fuchsia-100/80 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 backdrop-blur-lg shadow-lg py-3 px-6 flex items-center justify-between transition-colors duration-300"
+    >
       {/* Left: Logo */}
       <div className="flex items-center gap-2">
         <Image
