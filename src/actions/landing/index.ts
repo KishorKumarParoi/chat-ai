@@ -20,9 +20,10 @@ export const onGetBlogPosts = async () => {
     let i = 0;
     while (i < posts.data.length) {
       const image = await axios.get(
-        `${process.env.CLOUDWAYS_WORDPRESS_BLOG_IMAGE_URL}`
+        `${process.env.CLOUDWAYS_WORDPRESS_BLOG_IMAGE_URL}/${posts.data[i].featured_media}`
       );
-      console.log("image:", image.data);
+
+      console.log("image", image);
 
       if (image) {
         const post: {

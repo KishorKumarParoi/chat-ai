@@ -2,9 +2,9 @@ import HeroSection from "@/components/main-page/heroSection";
 import MainSection from "@/components/main-page/MainSection";
 import Navbar from "@/components/navbar";
 
-const Home = () => {
+const Home = async () => {
   return (
-    <main>
+    <main suppressHydrationWarning>
       <Navbar />
       <HeroSection />
       <MainSection />

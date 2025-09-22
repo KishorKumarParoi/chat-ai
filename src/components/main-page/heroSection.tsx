@@ -59,41 +59,80 @@ const HeroSection = () => {
           </p>
         </section>
 
-        <div className="flex justify-center gap-4 flex-wrap mt-6">
-          {pricingCards.map((card) => (
+        <div className="flex justify-center gap-4 flex-nowrap mt-6 max-w-6xl mx-auto">
+          {pricingCards.map((card, index) => (
             <Card
               key={card.title}
-              className={clsx("w-[300px] flex flex-col justify-between", {
-                "border-2 border-primary": card.title === "Unlimited",
-              })}
+              className={clsx(
+                "w-[300px] flex flex-col justify-between transition-all duration-300",
+                {
+                  "border-2 border-primary scale-105 shadow-2xl relative z-10":
+                    index === Math.floor(pricingCards.length / 2), // Middle card highlighted
+                  "hover:scale-[1.02] shadow-lg":
+                    index !== Math.floor(pricingCards.length / 2),
+                }
+              )}
             >
+              {/* Popular Badge for middle card */}
+              {index === Math.floor(pricingCards.length / 2) && (
+                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-1 rounded-full text-sm font-bold ">
+                  Most Popular
+                </div>
+              )}
+
               <CardHeader>
-                <CardTitle className="text-orange-500">{card.title}</CardTitle>
-                <CardDescription>
+                <CardTitle
+                  className={clsx("text-2xl font-bold", {
+                    "text-orange-500":
+                      index !== Math.floor(pricingCards.length / 2),
+                    "text-purple-600":
+                      index === Math.floor(pricingCards.length / 2),
+                  })}
+                >
+                  {card.title}
+                </CardTitle>
+                <CardDescription className="text-base">
                   {
                     pricingCards.find((c) => c.title === card.title)
                       ?.description
                   }
                 </CardDescription>
               </CardHeader>
+
               <CardContent>
-                <span className="text-4xl font-bold"> {card.price} </span>
+                <span
+                  className={clsx("text-4xl font-bold", {
+                    "text-purple-600":
+                      index === Math.floor(pricingCards.length / 2),
+                  })}
+                >
+                  {card.price}
+                </span>
                 <span className="text-muted-foreground">
                   <span> /month </span>
                 </span>
               </CardContent>
-              <CardFooter className=" flex flex-col items-start gap-4">
-                <div>
+
+              <CardFooter className="flex flex-col items-start gap-4">
+                <div className="space-y-2">
                   {card?.features.map((feature) => (
-                    <div key={feature} className="flex gap-2">
-                      <Check />
-                      <p>{feature}</p>
+                    <div key={feature} className="flex gap-2 items-center">
+                      <Check className="w-4 h-4 text-green-500" />
+                      <p className="text-sm">{feature}</p>
                     </div>
                   ))}
                 </div>
                 <Link
                   href={`/dashboard?plan=${card.title}`}
-                  className="bg-[#f3d299] border-orange-500 border-2 p-2 w-full text-center font-bold rounded-md"
+                  className={clsx(
+                    "p-3 w-full text-center font-bold rounded-md transition-colors",
+                    {
+                      "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700":
+                        index === Math.floor(pricingCards.length / 2),
+                      "bg-[#f3d299] border-orange-500 border-2 hover:bg-orange-100":
+                        index !== Math.floor(pricingCards.length / 2),
+                    }
+                  )}
                 >
                   Get Started
                 </Link>

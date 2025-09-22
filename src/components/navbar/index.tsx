@@ -11,6 +11,7 @@ const Navbar = () => {
       {/* Left: Logo */}
       <div className="flex items-center gap-2">
         <Image
+          suppressHydrationWarning
           src="/images/chat-ai.jpeg"
           alt="Chat.ai Logo"
           width={40}
