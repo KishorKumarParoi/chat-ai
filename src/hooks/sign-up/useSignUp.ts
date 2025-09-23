@@ -39,9 +39,41 @@ export const useSignUpForm = () => {
 
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
 
+      toast.success("Verification code sent to your email!");
       onNext((prev) => prev + 1);
-    } catch (error) {
-      toast("Error in otp verification. An unexpected error occurred: ", error);
+    } catch (error: any) {
+      console.error("SignUp Error:", error);
+
+      const errorCode = error?.errors?.[0]?.code;
+      const errorMessage = error?.errors?.[0]?.longMessage || error?.message;
+
+      switch (errorCode) {
+        case "form_identifier_exists":
+          // In development, suggest using a different email
+          if (process.env.NODE_ENV === "development") {
+            toast.error(
+              "This email exists in Clerk. Try: test" +
+                Date.now() +
+                "@example.com"
+            );
+          } else {
+            toast.error(
+              "This email is already registered. Please sign in instead.",
+              {
+                action: {
+                  label: "Sign In",
+                  onClick: () => router.push("/auth/sign-in"),
+                },
+              }
+            );
+          }
+          break;
+        case "captcha_invalid":
+          toast.error("CAPTCHA verification failed. Please try again.");
+          break;
+        default:
+          toast.error(errorMessage || "Registration failed. Please try again.");
+      }
     }
   };
 

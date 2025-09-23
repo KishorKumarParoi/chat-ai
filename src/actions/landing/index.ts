@@ -19,11 +19,14 @@ export const onGetBlogPosts = async () => {
 
     let i = 0;
     while (i < posts.data.length) {
-      const image = await axios.get(
-        `${process.env.CLOUDWAYS_WORDPRESS_BLOG_IMAGE_URL}/${posts.data[i].featured_media}`
-      );
+      let image;
+      if (posts.data[i].featured_media !== 0) {
+        image = await axios.get(
+          `${process.env.CLOUDWAYS_WORDPRESS_BLOG_IMAGE_URL}/${posts.data[i].featured_media}`
+        );
+      }
 
-      console.log("image", image);
+      console.log("image", image?.data);
 
       if (image) {
         const post: {
@@ -49,5 +52,30 @@ export const onGetBlogPosts = async () => {
       status: 500,
       message: `Internal Error on fetching blog post: ${error}`,
     };
+  }
+};
+
+export const onGetBlogPost = async (id: string) => {
+  try {
+    const postsUrl = process.env.CLOUDWAYS_WORDPRESS_BLOG_URL;
+    if (!postsUrl) return;
+
+    const post = await axios.get(`${postsUrl}${id}`);
+    if (post.data) {
+      const author = await axios.get(
+        `${process.env.CLOUDWAYS_WORDPRESS_BLOG_AUTHOR_URL}`
+      );
+      if (author.data) {
+        return {
+          id: post.data.id,
+          title: post.data.title.rendered,
+          content: post.data.content.rendered,
+          createdAt: new Date(post.data.date),
+          author: author.data.name,
+        };
+      }
+    }
+  } catch (error) {
+    console.log(error);
   }
 };

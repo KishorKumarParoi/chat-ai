@@ -70,7 +70,7 @@ const Navbar = () => {
       {/* Right: Free Trial Button & Mode Toggle */}
       <div className="flex items-center gap-2">
         <Link
-          href="/free-trial"
+          href="/dashboard"
           className="bg-gradient-to-r from-fuchsia-600 via-purple-600 to-blue-500 hover:from-fuchsia-700 hover:via-purple-700 hover:to-blue-600 text-white font-bold px-6 py-2 rounded-xl shadow-lg transition-all duration-300 mr-2 dark:from-fuchsia-500 dark:via-purple-500 dark:to-blue-400"
         >
           Free Trial
